@@ -2,3 +2,7 @@
 *.a
 *.so
 *.swp
+builddir/
+test/lunikey.so
+test/lunikey.dll
+test/lunikey.dylib
