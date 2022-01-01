@@ -8,19 +8,19 @@ end
 
 function love.textinput(key)
     if key == "space" then
-        lunikey.process(c, " ")
+        c:process(" ")
     else
-        lunikey.process(c, key)
+        c:process(key)
     end
 end
 
 function love.keypressed(key)
     if key == "backspace" then
-        lunikey.process_backspace(c)
+        c:process_backspace()
     end
 end
 
 function love.draw()
     love.graphics.setFont(font)
-    love.graphics.print(lunikey.get_result(c), 0, 0)
+    love.graphics.print(c:text(), 0, 0)
 end
