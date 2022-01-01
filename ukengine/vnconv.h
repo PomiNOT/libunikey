@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef __VN_CONVERT_H
 #define __VN_CONVERT_H
 
-#if defined(_WIN32)
+#if defined(_WIN32) && defined(UK_ENGINE_USE_DLL)
     #if defined(UNIKEYHOOK)
         #define DllInterface   __declspec( dllexport )
     #else

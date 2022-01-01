@@ -27,7 +27,7 @@
 #include "keycons.h"
 #include "charset.h"
 
-#if defined(_WIN32)
+#if defined(_WIN32) && defined(UK_ENGINE_USE_DLL)
     #if defined(UNIKEYHOOK)
         #define DllInterface   __declspec( dllexport )
     #else

@@ -2,7 +2,7 @@
 
 using namespace unikey;
 
-#ifdef _WIN32
+#ifdef _MSC_VER
     #define BINDINGS_API __declspec(dllexport)
 #else
     #define BINDINGS_API

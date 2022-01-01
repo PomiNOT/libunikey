@@ -154,11 +154,19 @@ DllExport int VnFileConvert(int inCharset, int outCharset, const char *inFile, c
 		strcpy(tmpName, outDir);
         strcat(tmpName, "XXXXXX");
 
+#if _MSC_VER
+		if (!_mktemp(tmpName)) {
+			fclose(inf);
+			ret = VNCONV_ERR_OUTPUT_FILE;
+			goto end;
+		}
+#else
 		if (mkstemp(tmpName) == -1) {
 			fclose(inf);
 			ret = VNCONV_ERR_OUTPUT_FILE;
 			goto end;
 		}
+#endif
 		outf = fopen(tmpName, "wb");
 
 		if (outf == NULL) {

@@ -26,7 +26,7 @@
 #include "keycons.h"
 #include "vnlexi.h"
 
-#if defined(_WIN32)
+#if defined(_WIN32) && defined(UK_ENGINE_USE_DLL)
     #define DllExport   __declspec( dllexport )
     #define DllImport   __declspec( dllimport )
     #if defined(UNIKEYHOOK)
