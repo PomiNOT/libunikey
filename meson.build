@@ -19,4 +19,18 @@ sources = [
 	'ukengine/usrkeymap.cpp'
 ]
 
-library('lunikey', sources, include_directories : ukincdir, dependencies : liblua_dep, cpp_args : '-funsigned-char')
+args = []
+
+compiler = meson.get_compiler('cpp')
+
+if compiler.get_id() == 'gcc'
+	args = ['-funsigned-char']
+endif
+
+shared_library(
+	'lunikey',
+	sources,
+	include_directories : ukincdir,
+	dependencies : liblua_dep,
+	cpp_args : args
+)

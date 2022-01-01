@@ -2,12 +2,18 @@
 
 using namespace unikey;
 
+#ifdef _WIN32
+    #define BINDINGS_API __declspec(dllexport)
+#else
+    #define BINDINGS_API
+#endif
+
 extern "C" {
     #include <lua.h>
     #include <lualib.h>
     #include <lauxlib.h>
 
-    int unikey_new(lua_State *L) {
+    BINDINGS_API int unikey_new(lua_State *L) {
         SimpleUnikey* unikey = new SimpleUnikey();
         SimpleUnikey** u = (SimpleUnikey**)lua_newuserdata(L, sizeof(SimpleUnikey*));
         *u = unikey;
@@ -18,7 +24,7 @@ extern "C" {
         return 1;
     }
 
-    int unikey_process(lua_State *L) {
+    BINDINGS_API int unikey_process(lua_State *L) {
         luaL_argcheck(L, lua_isuserdata(L, 1), 1, "lunikey instance expected");
         luaL_argcheck(L, lua_isstring(L, 2), 2, "string expected");
 
@@ -28,7 +34,7 @@ extern "C" {
         return 0;
     }
 
-    int unikey_get_result(lua_State *L) {
+    BINDINGS_API int unikey_get_result(lua_State *L) {
         luaL_argcheck(L, lua_isuserdata(L, 1), 1, "lunikey instance expected");
 
         SimpleUnikey** u = (SimpleUnikey**)lua_touserdata(L, 1);
@@ -37,7 +43,7 @@ extern "C" {
         return 1;
     }
 
-    int unikey_restore(lua_State *L) {
+    BINDINGS_API int unikey_restore(lua_State *L) {
         luaL_argcheck(L, lua_isuserdata(L, 1), 1, "lunikey instance expected");
 
         SimpleUnikey** u = (SimpleUnikey**)lua_touserdata(L, 1);
@@ -45,7 +51,7 @@ extern "C" {
         return 0;
     }
 
-    int unikey_reset(lua_State *L) {
+    BINDINGS_API int unikey_reset(lua_State *L) {
         luaL_argcheck(L, lua_isuserdata(L, 1), 1, "lunikey instance expected");
 
         SimpleUnikey** u = (SimpleUnikey**)lua_touserdata(L, 1);
@@ -53,7 +59,7 @@ extern "C" {
         return 0;
     }
 
-    int unikey_process_backspace(lua_State *L) {
+    BINDINGS_API int unikey_process_backspace(lua_State *L) {
         luaL_argcheck(L, lua_isuserdata(L, 1), 1, "lunikey instance expected");
 
         SimpleUnikey** u = (SimpleUnikey**)lua_touserdata(L, 1);
@@ -61,7 +67,7 @@ extern "C" {
         return 0;
     }
 
-    int unikey_destroy(lua_State *L) {
+    BINDINGS_API int unikey_destroy(lua_State *L) {
         luaL_argcheck(L, lua_isuserdata(L, 1), 1, "lunikey instance expected");
 
         SimpleUnikey** u = (SimpleUnikey**)lua_touserdata(L, 1);
@@ -80,7 +86,7 @@ extern "C" {
         {NULL, NULL}
     };
 
-    int luaopen_lunikey(lua_State *L) {
+    BINDINGS_API int luaopen_lunikey(lua_State *L) {
         luaL_newmetatable(L, "luaL_lunikey");
 
         lua_pushstring(L, "__index");
