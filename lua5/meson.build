@@ -33,9 +33,13 @@ lua_sources = [
     'src/linit.c'
 ]
 
-liblua = static_library('lua',
+cc = meson.get_compiler('c')
+m_dep = cc.find_library('m', required : false)
+
+liblua = shared_library('lua51',
   lua_sources,
   include_directories : luainc,
+  dependencies : [m_dep],
   install : false
 )
 
