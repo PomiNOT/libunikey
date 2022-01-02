@@ -22,5 +22,5 @@ end
 
 function love.draw()
     love.graphics.setFont(font)
-    love.graphics.print(c:text(), 0, 0)
+    love.graphics.printf(c:text(), 0, 0, love.graphics.getWidth())
 end

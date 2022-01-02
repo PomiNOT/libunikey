@@ -40,6 +40,7 @@ liblua = shared_library('lua51',
   lua_sources,
   include_directories : luainc,
   dependencies : [m_dep],
+  c_args : '-DLUA_BUILD_AS_DLL',
   install : false
 )
 
