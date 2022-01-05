@@ -36,13 +36,22 @@ lua_sources = [
 cc = meson.get_compiler('c')
 m_dep = cc.find_library('m', required : false)
 
-liblua = shared_library('lua51',
-  lua_sources,
-  include_directories : luainc,
-  dependencies : [m_dep],
-  c_args : '-DLUA_BUILD_AS_DLL',
-  install : false
-)
+if build_machine.system() == 'windows'
+ liblua = shared_library('lua51',
+    lua_sources,
+    include_directories : luainc,
+    dependencies : [m_dep],
+    c_args : '-DLUA_BUILD_AS_DLL',
+    install : false
+  )
+else
+  liblua = static_library('lua51',
+    lua_sources,
+    include_directories : luainc,
+    dependencies : [m_dep],
+    install : false
+  )
+endif
 
 liblua_dep = declare_dependency(
   link_with: liblua,
